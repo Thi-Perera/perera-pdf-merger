@@ -27,19 +27,21 @@ attualmente è presente solo un endpoint per l'operazione di merging tra 2 o pi�
 
 ### Richiesta
 
-La richiesta deve contenere l'api-key nell'header, e il json deve contenere almeno 2 file pdf in formato base64 e il nome da dare al pdf in output.
-Se la richiesta non dovesse essere conforme, il response conterrà una stringa con il tipo di errore oltre all' HTTP status.
+La richiesta deve contenere l'api-key nell'header, e il json deve contenere almeno 2 file pdf in formato base64 e il nome da dare al pdf in output.<br />
+I formati pdf accettati vanno da versione 1.0 a 1.7 .<br />
+Se la richiesta non dovesse essere conforme, il response conterrà una stringa con il tipo di errore oltre all' HTTP status.<br />
 
 ### Header della richiesta
-la label: API_KEY
-la variabile: api_key_receiver
 
 ```header
 API_KEY: <api_key>
 ```
 
-Momentanemente ho optato per una api-key costante
-api_key = "ABC123"
+Momentanemente ho optato per una api-key costante.<br />
+api_key = "ABC123".<br />
+
+la label: API_KEY.<br />
+la variabile: api_key_receiver.<br />
 
 
 ### Parametri della richiesta
@@ -64,7 +66,7 @@ api_key = "ABC123"
 
 ### Risposta
 
-Se la richiesta ha successo, l'API restituirà il file PDF unito in formato base64 e il nome del pdf con estensione (utile in un workflow)
+Se la richiesta ha successo, l'API restituirà il file PDF unito in formato base64 e il nome del pdf con estensione (utile in un workflow)\
 
 ### Parametri della risposta
 
@@ -83,8 +85,61 @@ risposta andata a buon fine:
 }
 ```
 
-risposta in caso di errore:
+risposte di errore:
+- Api-key scorretta o non presente
+- quantità di file insufficente
+- file invalido
+- internal server error generico durante il merging
 
+## UML class diagram
+```mermaid
+classDiagram
+  direction BT
+  
+  class Payload {
+    + Payload() 
+    - String operazione
+    - String[] files
+    + getFileb64(int) String
+    + getfilename() String
+    + setfilename(String) void
+    int fileQuantity
+    String operazione
+    String[] files
+  }
+  
+  class PdfManipulator {
+    + PdfManipulator() 
+    + mergePdf(PdfWrapper[]) PdfWrapper
+    + pdfToBytes(File) byte[]
+    + CheckIsPDF(byte[]) String
+    + bytesToB64(byte[]) String
+    + b64ToBytes(String) byte[]
+    + bytesToPdf(byte[], String) File
+  }
+  
+  class PdfWrapper {
+    + PdfWrapper(String, byte[]) 
+    - byte[] pdfContent
+    - String pdfName
+    String pdfName
+    byte[] pdfContent
+    byte[] tPdfContent
+  }
+  
+  class pdfmergeAPI {
+    + pdfmergeAPI() 
+    + main(String[]) void
+    + mergePDFs(String, Payload) ResponseEntity~String~
+    + getObject(PdfWrapper) String
+  }
+  
+  Payload -- PdfManipulator
+  PdfManipulator -- PdfWrapper
+  PdfWrapper --|> Payload
+  pdfmergeAPI -- Payload
+  pdfmergeAPI -- PdfWrapper
+```
 
 ## Dipendenze
 
