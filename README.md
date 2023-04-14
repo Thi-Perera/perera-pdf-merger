@@ -92,53 +92,41 @@ risposte di errore:
 - internal server error generico durante il merging
 
 ## UML class diagram
+
 ```mermaid
 classDiagram
-  direction BT
-  
-  class Payload {
-    + Payload() 
-    - String operazione
-    - String[] files
-    + getFileb64(int) String
-    + getfilename() String
-    + setfilename(String) void
-    int fileQuantity
-    String operazione
-    String[] files
-  }
-  
-  class PdfManipulator {
-    + PdfManipulator() 
-    + mergePdf(PdfWrapper[]) PdfWrapper
-    + pdfToBytes(File) byte[]
-    + CheckIsPDF(byte[]) String
-    + bytesToB64(byte[]) String
-    + b64ToBytes(String) byte[]
-    + bytesToPdf(byte[], String) File
-  }
-  
-  class PdfWrapper {
-    + PdfWrapper(String, byte[]) 
-    - byte[] pdfContent
-    - String pdfName
-    String pdfName
-    byte[] pdfContent
-    byte[] tPdfContent
-  }
-  
-  class pdfmergeAPI {
-    + pdfmergeAPI() 
-    + main(String[]) void
-    + mergePDFs(String, Payload) ResponseEntity~String~
-    + getObject(PdfWrapper) String
-  }
-  
-  Payload -- PdfManipulator
-  PdfManipulator -- PdfWrapper
-  PdfWrapper --|> Payload
-  pdfmergeAPI -- Payload
-  pdfmergeAPI -- PdfWrapper
+direction BT
+class Payload {
+  + Payload() 
+  - String[] files
+  + getfilename() String
+  + setfilename(String) void
+  + getFileb64(int) String
+   int fileQuantity
+   String[] files
+}
+class PdfManipulator {
+  + PdfManipulator() 
+  + b64ToBytes(String) byte[]
+  + mergePdf(PdfWrapper[]) PdfWrapper
+  + pdfToBytes(File) byte[]
+  + bytesToB64(byte[]) String
+  + CheckIsPDF(byte[]) String
+  + bytesToPdf(byte[], String) File
+}
+class PdfWrapper {
+  + PdfWrapper(String, byte[]) 
+  - byte[] pdfContent
+  - String pdfName
+   String pdfName
+   byte[] pdfContent
+}
+class pdfmergeAPI {
+  + pdfmergeAPI() 
+  + getObject(PdfWrapper, String) String
+  + mergePDFs(String, Payload) ResponseEntity~String~
+  + main(String[]) void
+}
 ```
 
 ## Dipendenze
