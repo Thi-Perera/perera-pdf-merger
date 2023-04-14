@@ -1,8 +1,4 @@
 # pdf_merge_API
-multiple pdf merger java API 
-
-# Titolo del Progetto
-
 Un API per il merge di più pdf in uno + creazione di un custom connector per l'implementazione in un workflow su  Windows Power Automate 
 
 
