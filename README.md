@@ -135,6 +135,94 @@ class pdfmergeAPI {
 - Apache PDFBox: libreria per effettuare operazioni sui pdf
 - commons-io: libreria per facilitare le conversioni tra formati di files
 
+## Power automate custom connector
+```json
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PdfMergerapi",
+    "description": "custom connector che usa un API per il merge di due o più pdf",
+    "version": "1.0"
+  },
+  "host": "37.77.121.227:20801",
+  "basePath": "/api/pdf/merge",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [],
+  "produces": [],
+  "paths": {
+    "/": {
+      "post": {
+        "responses": {
+          "default": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "PdfContent": {
+                  "type": "string",
+                  "description": "PdfContent"
+                },
+                "PdfName": {
+                  "type": "string",
+                  "description": "PdfName"
+                }
+              }
+            }
+          }
+        },
+        "summary": "merge dei pdf",
+        "description": "merge dei pdf in ordine di inserimento nel json",
+        "operationId": "1234",
+        "parameters": [
+          {
+            "name": "API_KEY",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "filename": {
+                  "type": "string",
+                  "description": "filename"
+                },
+                "files": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "files"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/api/pdf/merge": {}
+  },
+  "definitions": {},
+  "parameters": {},
+  "responses": {},
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "api_key_receiver"
+    }
+  },
+  "security": [],
+  "tags": []
+}
+```
+
 ## Licenza
 
 Questo progetto è distribuito con la licenza MIT. Consultare il file LICENSE per ulteriori informazioni.
