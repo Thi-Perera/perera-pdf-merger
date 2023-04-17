@@ -9,14 +9,13 @@ Il programma consente agli utenti di unire più file PDF in un unico documento t
 - Apache Maven 3.9.1
 - Connessione Internet
 
+## Installazione
 
-## Configurazione
+Per installare PDFMerge, scarica l'ultima [Release](https://github.com/Coco01010/perera-pdf-merger/releases/tag/pdf) del file JAR dell'applicazione. \
+Oppure eseguire il comando Maven per compilare ed eseguire l'applicazione: `mvn spring-boot:run` 
 
-1. Clonare il repository
-git clone https://github.com/NOME_DEL_REPO.git
-2. Eseguire il comando Maven per compilare ed eseguire l'applicazione
-mvn spring-boot:run
-3. L'applicazione sarà disponibile all'indirizzo `http://localhost:20801`
+La richiesta HTTP deve essere inviata a `http://<yourIP>:20801/api/pdf/merge`. 
+Inoltre, è necessario includere un [payload JSON](#esempio-di-richiesta) e specificare l'[header](#header-della-richiesta) come indicato di seguito.
 
 
 ## API
@@ -136,10 +135,6 @@ class pdfmergeAPI {
 - Apache PDFBox: libreria per effettuare operazioni sui pdf
 - commons-io: libreria per facilitare le conversioni tra formati di files
 
-## Installazione
-
-Per installare PDFMerge, scarica l'ultima [Release](https://github.com/Coco01010/perera-pdf-merger/releases/tag/pdf) del file JAR dell'applicazione.
-
 
 ## Power automate custom connector
 ```json
@@ -229,6 +224,3 @@ Per installare PDFMerge, scarica l'ultima [Release](https://github.com/Coco01010
 }
 ```
 
-## Licenza
-
-Questo progetto è distribuito con la licenza MIT. Consultare il file LICENSE per ulteriori informazioni.
