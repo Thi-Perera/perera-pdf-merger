@@ -1,5 +1,6 @@
 # pdf_merge_API
-Un API per il merge di più pdf in uno + creazione di un custom connector per l'implementazione in un workflow su  Windows Power Automate 
+
+Il programma consente agli utenti di unire più file PDF in un unico documento tramite un API + creazione di un custom connector per l'implementazione in un workflow su  Windows Power Automate 
 
 
 ## Prerequisiti
@@ -134,6 +135,11 @@ class pdfmergeAPI {
 - Spring Boot:  per configurare un endpoint e l'api
 - Apache PDFBox: libreria per effettuare operazioni sui pdf
 - commons-io: libreria per facilitare le conversioni tra formati di files
+
+## Installazione
+
+Per installare PDFMerge, scarica l'ultima [Release](https://github.com/Coco01010/perera-pdf-merger/releases/tag/pdf) del file JAR dell'applicazione.
+
 
 ## Power automate custom connector
 ```json
