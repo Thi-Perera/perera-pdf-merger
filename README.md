@@ -223,4 +223,9 @@ class pdfmergeAPI {
   "tags": []
 }
 ```
+# Licenza
 
+ PereraPdfMerger is licensed under the GNU General Public License v3.0 \
+ PereraPdfMerger è un software libero: puoi ridistribuirlo e/o modificarlo \
+ in base ai termini della Licenza Pubblica Generale GNU, pubblicata dalla Free Software Foundation,\
+ o successivamente pubblicata dalla stessa fondazione; senza alcuna modifica alla licenza.
