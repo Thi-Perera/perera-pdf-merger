@@ -1,15 +1,15 @@
 # pdf_merge_API
 
 Il programma è un API che consente agli utenti di unire più file PDF in un unico documento, in fine verrà sfruttato l'API per la creazione di un custom connector per l'implementazione in un workflow su  Windows Power Automate 
-
+<br />
 # Operazioni
 
 L'API è stata concepita per una sola operazione, ma la Classe Pdf_Manipulator contiene metodi attualmente inutilizzati, per implementazioni future.
-
+<br />
 ### Unione di file PDF
 
 L'endpoint "api/pdf/merge" rappresenta il punto di accesso da utilizzare per unire due o più file PDF. Per effettuare la l'operazione, è necessario inviare un [JSON in un formato specifico](#header-della-richiesta) come parte della richiesta. 
-
+<br />
 # Architettura
 
 Il progetto è un'applicazione scritta in Java che utilizza Apache Maven per la gestione delle dipendenze. In particolare, Java Spring Boot è il framework utilizzato per la configurazione dell'endpoint. Inoltre, sono state utilizzate due librerie: Commons IO, per semplificare la conversione tra i file, e Apache PDFBox, per la manipolazione dei file PDF.
@@ -23,7 +23,7 @@ Il progetto è un'applicazione scritta in Java che utilizza Apache Maven per la 
 
 # API
 
-#### classe: Payload
+## classe: Payload
 
 ```mermaid
 classDiagram
@@ -39,7 +39,7 @@ class Payload {
 }
 ```
 
-Metodi:
+### Metodi:
 
 - getfilename() : restituisce il nome del file risultante dall'unione dei file PDF
 - setfilename(String filename) : imposta il nome del file risultante - dall'unione dei file PDF
@@ -47,7 +47,7 @@ Metodi:
 - getFileQuantity() : restituisce il numero di file presenti nell'array files
 - setFiles(String[] files) : imposta l'array di file PDF da unire (in formato base64)
 
-#### classe: PdfManipulator
+## classe: PdfManipulator
 ```mermaid
 classDiagram
 direction BT
@@ -63,19 +63,19 @@ class PdfManipulator {
 }
 
 ```
-Metodi:
+### Metodi:
 
 - bytesToB64(byte[] pdfContent) --> restituisce una stringa, prende in input un array di byte e restituisce la sua rappresentazione in formato base64 come stringa
 - b64ToBytes(String base64String) --> restituisce un array di byte, prende in input una stringa in formato base64 e restituisce i corrispondenti byte
 - mergePdf(PdfWrapper[] pdfwrapperArray) --> restituisce un oggetto di tipo PdfWrapper, prende in input un array di oggetti PdfWrapper che rappresentano i file PDF da unire e restituisce un nuovo PdfWrapper contenente il merge dei file
 - CheckIsPDF(byte[] data) --> restituisce una stringa, prende in input un array di byte rappresentante un file PDF e verifica se il file è valido restituendo una stringa con lo stato della validità del file (ValidPdf, Unsupported PDF version, Invalid file header, argumentnull exception)
 
-Metodi non utilizzati nel progetto:
+### Metodi: non utilizzati nel progetto:
 
 - bytesToPdf(byte[] byteData, String destinationPath) --> restituisce un oggetto di tipo File, prende in input un array di byte e il percorso di destinazione su disco dove salvare il file in formato PDF
 - pdfToBytes(File file) --> restituisce un array di byte, prende in input un oggetto di tipo File che rappresenta un file in formato PDF e restituisce i suoi byte
 
-#### classe: pdfmergeAPI
+## classe: pdfmergeAPI
 
  Questa classe è l'api che permette l'unione dei file pdf validi.
  annotata con @SpringBootApplication, @RestController e @RequestMapping("/api/pdf") .
@@ -93,7 +93,7 @@ class pdfmergeAPI {
 
 ```
 
-Parametri:
+### Attributi:
 
 - api_key: String
 - api_key_received: String
@@ -101,13 +101,15 @@ Parametri:
 - MergedPdf: PdfWrapper
 - name: String
 
-Metodi:
+### Metodi:
 
 - main(): --> questo metodo è il punto di ingresso dell'applicazione e avvia l'esecuzione dell'API. Riceve in input gli eventuali argomenti da linea di comando e avvia il server sulla porta specificata.
 - mergePDFs(String api_key_received, Payload request): ResponseEntity<String> -->  questo metodo gestisce la richiesta POST all'endpoint /api/pdf/merge. Riceve come parametri l'header API_KEY e il corpo della richiesta, rappresentato dall'oggetto Payload. Controlla la validità dell'API_KEY, la quantità di file richiesta e la validità dei singoli file in base al loro contenuto. Se tutto è corretto, richiama il metodo mergePdf() di PdfManipulator per unire i file e restituisce una risposta di successo con il pdf unito come corpo della risposta, altrimenti restituisce una risposta di errore con un messaggio appropriato.
 - getObject(PdfWrapper MergedPdf, String name): String --> : questo metodo è utilizzato all'interno di mergePDFs() e si occupa di costruire il JSON di risposta a partire dal pdf unito. Riceve in input un oggetto PdfWrapper e il nome del pdf unito. Costruisce un oggetto di tipo HashMap, inserisce al suo interno il contenuto del pdf unito e il nome del pdf stesso e restituisce una stringa JSON rappresentante l'oggetto.
+  
+  
 
-#### classe: PdfWrapper
+## classe: PdfWrapper
 
  Classe che rappresenta un file PDF, composto dal nome del file e dal contenuto in formato byte.
 
@@ -126,11 +128,12 @@ class PdfWrapper {
 
 ```
     
- Attributi:
+ ### Attributi:
 
 - pdfName: String
 - pdfContent: byte[]
 
+ ### Metodi:
 - PdfWrapper(String pdfName, byte[] pdfBytes): Costruttore della classe che riceve come parametri il nome del file e il contenuto in formato byte e li assegna ai relativi attributi dell'istanza.
 - getPdfContent(): Metodo che restituisce il contenuto del file PDF in formato byte. Restituisce una copia dell'array cosicché possa essere modificato senza intaccare l'array originale.
 - getPdfName(): Metodo che restituisce il nome del file PDF.
