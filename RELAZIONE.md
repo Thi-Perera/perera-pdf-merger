@@ -6,7 +6,7 @@ Il programma è un API che consente agli utenti di unire più file PDF in un uni
 
 L'API è stata concepita per una sola operazione, ma la Classe Pdf_Manipulator contiene metodi attualmente inutilizzati, per implementazioni future.
 
-## Unione di file PDF
+### Unione di file PDF
 
 L'endpoint "api/pdf/merge" rappresenta il punto di accesso da utilizzare per unire due o più file PDF. Per effettuare la l'operazione, è necessario inviare un [JSON in un formato specifico](#header-della-richiesta) come parte della richiesta. 
 
@@ -21,18 +21,7 @@ Il progetto è un'applicazione scritta in Java che utilizza Apache Maven per la 
 - Apache PDFBox: https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox
 - commons-io: https://mvnrepository.com/artifact/commons-io/commons-io
 
-
-
-## Installazione
-
-Per installare PDFMerge, scarica l'ultima [Release](https://github.com/Coco01010/perera-pdf-merger/releases/tag/pdf) del file JAR dell'applicazione. \
-Oppure eseguire il comando Maven per compilare ed eseguire l'applicazione: `mvn spring-boot:run` 
-
-La richiesta HTTP deve essere inviata a `http://<yourIP>:20801/api/pdf/merge`. 
-Inoltre, è necessario includere un [payload JSON](#esempio-di-richiesta) e specificare l'[header](#header-della-richiesta) come indicato di seguito.
-
-
-## API
+# API
 
 ### CLASSI
 #### Payload
@@ -199,30 +188,24 @@ class pdfmergeAPI {
 
 # Requisiti
 
-## Information Hiding
+### Information Hiding
 
   Un esempio di information hiding è rappresentato dall'utilizzo del modificatore di accesso private all'interno della classe PdfWrapper, che incapsula i dati sensibili dell'oggetto, ovvero il nome e il contenuto del PDF. Questi dati possono essere acceduti solo attraverso i metodi pubblici della classe(i getter e i setter), che controllano l'accesso ai dati e ne garantiscono la coerenza.
 
 l'information hiding è presente anche nell'utilizzo del metodo b64ToBytes della classe PdfManipulator, che nasconde l'implementazione interna della conversione dal formato Base64 a byte array, proteggendo l'utente dalla complessità dell'algoritmo di conversione.
 
 
-## Incapsulamento
+### Incapsulamento
 L'incapsulamento è presente anche nella classe Payload, dove i dati sensibili, ovvero i nomi dei file e la loro quantità, vengono incapsulati e mantenuti privati e accessibili solo attraverso i metodi pubblici.
 
 L'incapsulamento è presente ad esempio nell'utilizzo del metodo mergePDFs della classe pdfmergeAPI, che incapsula la logica di unione dei PDF all'interno della classe PdfManipulator, proteggendo l'utente dall'implementazione interna dell' unione e semplificando l'utilizzo dell'API.
 
-## Ereditarietà
+### Ereditarietà
 
 non è presente alcuna ereditarietà esplicita tra le classi del diagramma.
 Ma ovviamente in modo implicito, tutte le classi del diagramma sono sottoclassi di Object, la classe di base di Java.
 
 L'ereditarietà è presente anche nell'utilizzo delle classi delle librerie, come ad esempio nella classe ResponseEntity utilizzata dalla classe pdfmergeAPI, che eredita dalla classe HttpEntity e rappresenta una risposta HTTP con un corpo di tipo generico.
-
-## Dipendenze
-
-- Spring Boot:  per configurare un endpoint e l'api
-- Apache PDFBox: libreria per effettuare operazioni sui pdf
-- commons-io: libreria per facilitare le conversioni tra formati di files
 
 
 ## Power automate custom connector
